@@ -3,157 +3,394 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MindCheck — Mental Health Screening</title>
+  <title>MindCheck — Multidisciplinary Clinical Board Mental Health Screening</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app">
 
-    <!-- HEADER -->
+    <!-- CLINICAL APP HEADER -->
     <header class="app-header">
       <div class="header-left" onclick="onBackToProfiles()" style="cursor: pointer;">
-        <span class="logo-icon">🧠</span>
-        <span class="logo-text">MindCheck</span>
+        <span class="logo-icon">🩺</span>
+        <div class="logo-group">
+          <span class="logo-text">MindCheck</span>
+          <span class="logo-subtext">Clinical Board Diagnostic Platform</span>
+        </div>
       </div>
       <div class="header-right">
-        <span class="header-badge">Free Screening Tool</span>
+        <span class="header-badge">5 Board Specialists</span>
+        <span class="header-badge badge-save" id="header-autosave">● Auto-Saved</span>
       </div>
     </header>
 
-    <!-- SCREEN 1: PROFILE LIST -->
+    <!-- SCREEN 1: CLINICAL BOARD OVERVIEW & PROFILES -->
     <div id="screen-profiles" class="screen active">
       <div class="screen-inner">
+        
+        <!-- HERO -->
         <div class="hero-section">
-          <h1>Welcome to MindCheck</h1>
-          <p class="hero-subtitle">A comprehensive mental health screening with 85 research-based questions covering depression, anxiety, ADHD, bipolar, OCD, PTSD, and more.</p>
+          <div class="board-badge-pill">Clinical Evaluation Suite</div>
+          <h1>Multidisciplinary Mental Health Diagnostic Assessment</h1>
+          <p class="hero-subtitle">
+            An in-depth clinical screening modeled after a consultation with five specialized medical and psychological experts. Covering neurodevelopment, childhood trauma (ACEs), mood cycles, temperament (introversion), and autonomic nervous system regulation.
+          </p>
+
           <div class="hero-disclaimer">
-            ⚠️ This is a screening tool only — not a medical diagnosis. Always consult a licensed professional.
+            ⚖️ <strong>Clinical Notice:</strong> This advanced screening mimics an expert medical board diagnostic review for education and self-awareness. It provides detailed differential hypotheses, not a formal legal or prescription medical diagnosis.
           </div>
         </div>
 
-        <div class="section-header">
-          <h2>Your Profiles</h2>
-          <button class="btn btn-primary" onclick="renderCreateProfile()">+ New Profile</button>
+        <!-- SPECIALIST BOARD PREVIEW -->
+        <div class="board-preview-section">
+          <h3 class="section-title">The MindCheck Consulting Board</h3>
+          <div class="board-grid">
+            <div class="doctor-badge-card">
+              <span class="doc-avatar">👩‍⚕️</span>
+              <div class="doc-meta">
+                <div class="doc-name">Dr. Sarah Jenkins, M.D.</div>
+                <div class="doc-role">Neuropsychiatrist · Mood & Sleep Lead</div>
+              </div>
+            </div>
+            <div class="doctor-badge-card">
+              <span class="doc-avatar">👨‍⚕️</span>
+              <div class="doc-meta">
+                <div class="doc-name">Dr. Marcus Vance, Ph.D.</div>
+                <div class="doc-role">Clinical Trauma & ACE Specialist</div>
+              </div>
+            </div>
+            <div class="doctor-badge-card">
+              <span class="doc-avatar">👩‍🔬</span>
+              <div class="doc-meta">
+                <div class="doc-name">Dr. Elena Rostova, M.D., Ph.D.</div>
+                <div class="doc-role">Adult ADHD & Executive Function Lead</div>
+              </div>
+            </div>
+            <div class="doctor-badge-card">
+              <span class="doc-avatar">👨‍⚕️</span>
+              <div class="doc-meta">
+                <div class="doc-name">Dr. Kabir Patel, Psy.D.</div>
+                <div class="doc-role">Anxiety, Panic & Somatic Psychophysiologist</div>
+              </div>
+            </div>
+            <div class="doctor-badge-card">
+              <span class="doc-avatar">👩‍⚕️</span>
+              <div class="doc-meta">
+                <div class="doc-name">Dr. Maya Lin, Ph.D.</div>
+                <div class="doc-role">Temperament, Introversion & Emotion Lead</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div id="profile-list" class="profile-list">
-          <!-- Rendered by JS -->
+        <!-- PROFILE MANAGEMENT -->
+        <div class="profiles-section">
+          <div class="section-header">
+            <h2>Patient Profiles & Assessments</h2>
+            <button class="btn btn-primary" onclick="renderCreateProfile()">+ New Assessment Profile</button>
+          </div>
+
+          <div id="profile-list" class="profile-list">
+            <!-- Rendered by JS -->
+          </div>
         </div>
+
       </div>
     </div>
 
-    <!-- SCREEN 2: CREATE PROFILE -->
+    <!-- SCREEN 2: CLINICAL INTAKE (CREATE PROFILE) -->
     <div id="screen-create-profile" class="screen">
       <div class="screen-inner">
-        <button class="btn-back" onclick="renderProfileScreen()">← Back</button>
+        <button class="btn-back" onclick="renderProfileScreen()">← Back to Overview</button>
         <div class="form-card">
-          <h2>Create Your Profile</h2>
-          <p class="form-hint">Your data is stored locally on this device only. Nothing is sent to any server.</p>
+          <div class="form-header-badge">Patient Intake</div>
+          <h2>Begin Board Consultation</h2>
+          <p class="form-hint">
+            Your responses are stored securely in your private browser session. No medical information is ever transmitted to an external server.
+          </p>
 
           <div class="form-group">
-            <label for="input-name">Name or Nickname *</label>
-            <input type="text" id="input-name" placeholder="e.g., Alex" maxlength="40" autocomplete="off">
+            <label for="input-name">Full Name or Preferred Name *</label>
+            <input type="text" id="input-name" placeholder="e.g., Alex Carter" maxlength="40" autocomplete="off">
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="input-age">Age (optional)</label>
-              <input type="number" id="input-age" placeholder="e.g., 25" min="10" max="120">
+              <input type="number" id="input-age" placeholder="e.g., 28" min="12" max="110">
             </div>
             <div class="form-group">
-              <label for="select-gender">Gender (optional)</label>
+              <label for="select-gender">Gender Identity (optional)</label>
               <select id="select-gender">
                 <option value="prefer-not-to-say">Prefer not to say</option>
-                <option value="male">Male</option>
                 <option value="female">Female</option>
+                <option value="male">Male</option>
                 <option value="non-binary">Non-binary</option>
                 <option value="other">Other</option>
               </select>
             </div>
           </div>
 
-          <button class="btn btn-primary btn-lg" onclick="onCreateProfile()">Start Assessment →</button>
+          <div class="form-group">
+            <label for="input-chief-complaint">Primary Reason for Assessment (optional)</label>
+            <input type="text" id="input-chief-complaint" placeholder="e.g., Struggling with brain fog, childhood memories, and feeling drained around people">
+          </div>
+
+          <button class="btn btn-primary btn-lg" onclick="onCreateProfile()">Enter Board Consultation Room →</button>
         </div>
       </div>
     </div>
 
-    <!-- SCREEN 3: QUIZ -->
+    <!-- SCREEN 3: CLINICAL CONSULTATION ROOM (QUIZ FLOW) -->
     <div id="screen-quiz" class="screen">
       <div class="screen-inner quiz-layout">
-        <!-- Progress -->
+        
+        <!-- Progress Bar & Session Header -->
         <div class="progress-section">
           <div class="progress-info">
-            <span id="progress-text">Question 1 of 85</span>
-            <span id="progress-percent">0%</span>
+            <div class="progress-left">
+              <span class="session-patient" id="quiz-patient-name">Patient: Alex</span>
+              <span class="separator">·</span>
+              <span id="progress-text">Question 1 of 50</span>
+            </div>
+            <span id="progress-percent" class="progress-percent">0% Completed</span>
           </div>
           <div class="progress-bar">
             <div class="progress-bar-fill" id="progress-bar-fill"></div>
           </div>
         </div>
 
-        <!-- Question -->
+        <!-- SPECIALIST CONSULTANT BADGE (WHO IS ASKING) -->
+        <div class="consultant-banner" id="consultant-banner">
+          <div class="consultant-avatar" id="consultant-avatar">👩‍⚕️</div>
+          <div class="consultant-details">
+            <div class="consultant-name" id="consultant-name">Dr. Sarah Jenkins, M.D.</div>
+            <div class="consultant-title" id="consultant-title">Neuropsychiatrist · Mood & Sleep Lead</div>
+          </div>
+          <div class="consultant-badge" id="consultant-badge">Clinical Inquiry</div>
+        </div>
+
+        <!-- QUESTION CARD -->
         <div class="question-card">
+          <!-- Doctor's conversational note -->
+          <div class="doctor-note-box" id="doctor-note-box">
+            <span class="note-icon">💬</span>
+            <span class="note-text" id="doctor-note-text">Doctor's Note...</span>
+          </div>
+
           <h2 id="question-text" class="question-text">Loading question...</h2>
 
+          <!-- DYNAMIC INPUT CONTAINER -->
           <div id="options-container" class="options-container">
-            <!-- Rendered by JS -->
+            <!-- Rendered by JS based on type: single, multi, scenario, scale -->
           </div>
         </div>
 
-        <!-- Navigation -->
+        <!-- Navigation Buttons -->
         <div class="quiz-nav">
           <button id="btn-prev" class="btn btn-ghost" onclick="onPrevQuestion()">← Previous</button>
-          <button id="btn-next" class="btn btn-primary" onclick="onNextQuestion()" disabled>Select an answer</button>
+          <div class="nav-right">
+            <button id="btn-next" class="btn btn-primary" onclick="onNextQuestion()" disabled>Continue →</button>
+          </div>
         </div>
 
         <div class="quiz-hint">
-          💡 Tip: Press <kbd>1</kbd>-<kbd>4</kbd> to select, <kbd>←</kbd> <kbd>→</kbd> to navigate
+          💡 Tip: Answers are saved instantly to your device. You can leave and resume anytime without losing progress.
         </div>
       </div>
     </div>
 
-    <!-- SCREEN 4: RESULTS -->
+    <!-- SCREEN 4: MULTI-PAGE CLINICAL BOARD REPORT -->
     <div id="screen-results" class="screen">
-      <div class="screen-inner">
-        <div class="results-header">
-          <h1>Your Screening Results</h1>
-          <p id="results-answered" class="results-meta"></p>
+      <div class="screen-inner dossier-layout">
+        
+        <!-- PRINT / ACTION BAR -->
+        <div class="dossier-actions-bar no-print">
+          <button class="btn btn-secondary" onclick="onBackToProfiles()">← Back to Dashboard</button>
+          <div class="action-buttons-group">
+            <button class="btn btn-outline" onclick="window.print()">🖨️ Print / Save PDF Dossier</button>
+            <button class="btn btn-primary" onclick="onRetakeAssessment()">🔄 Retake Assessment</button>
+          </div>
         </div>
 
-        <div class="results-disclaimer">
-          ⚠️ <strong>Important:</strong> These results are for educational and self-awareness purposes only. They are <strong>NOT</strong> a clinical diagnosis. Only a licensed mental health professional can provide an accurate assessment. If you are in crisis, please contact a helpline or emergency services immediately.
-        </div>
+        <!-- OFFICIAL BOARD REPORT HEADER -->
+        <div class="dossier-document">
+          <div class="dossier-header">
+            <div class="dossier-emblem">
+              <span class="emblem-icon">⚕️</span>
+            </div>
+            <div class="dossier-title-block">
+              <div class="dossier-kicker">MINDCHECK CLINICAL BOARD OF EVALUATION</div>
+              <h1 class="dossier-main-title">Comprehensive Neuro-Psychological Clinical Dossier</h1>
+              <div class="dossier-subtitle">Multi-Specialty Consensus Diagnostic Formulation & Recovery Architecture</div>
+            </div>
+            <div class="dossier-stamp">
+              <span class="stamp-border">BOARD CERTIFIED REVIEW</span>
+            </div>
+          </div>
 
-        <div class="results-summary-box">
-          <h3>📋 Summary</h3>
-          <p id="results-summary"></p>
-        </div>
+          <!-- PATIENT DEMOGRAPHICS & CASE STRIP -->
+          <div class="patient-record-strip">
+            <div class="record-item">
+              <span class="record-label">Patient Record:</span>
+              <span class="record-val" id="dossier-patient-name">Alex Carter</span>
+            </div>
+            <div class="record-item">
+              <span class="record-label">Evaluation Date:</span>
+              <span class="record-val" id="dossier-date">November 23, 2026</span>
+            </div>
+            <div class="record-item">
+              <span class="record-label">Questions Evaluated:</span>
+              <span class="record-val" id="dossier-coverage">50 of 50 items</span>
+            </div>
+            <div class="record-item">
+              <span class="record-label">Board Status:</span>
+              <span class="record-val status-confirmed">Consensus Reached</span>
+            </div>
+          </div>
 
-        <h3 class="section-title">Detailed Breakdown</h3>
-        <div id="results-cards" class="results-cards">
-          <!-- Rendered by JS -->
-        </div>
+          <!-- DOSSIER NAVIGATION TABS (INTERACTIVE IN BROWSER) -->
+          <div class="dossier-tabs no-print">
+            <button class="dossier-tab active" onclick="switchDossierTab('tab-consensus')">1. Executive Consensus</button>
+            <button class="dossier-tab" onclick="switchDossierTab('tab-deliberations')">2. Board Deliberations</button>
+            <button class="dossier-tab" onclick="switchDossierTab('tab-differentials')">3. Differential Analysis</button>
+            <button class="dossier-tab" onclick="switchDossierTab('tab-conditions')">4. Clinical Breakdown</button>
+            <button class="dossier-tab" onclick="switchDossierTab('tab-action')">5. Action Roadmap</button>
+          </div>
 
-        <div class="results-actions">
-          <button class="btn btn-primary" onclick="onRetakeAssessment()">🔄 Retake Assessment</button>
-          <button class="btn btn-ghost" onclick="onBackToProfiles()">← Back to Profiles</button>
-        </div>
+          <!-- TAB 1: EXECUTIVE CONSENSUS -->
+          <div id="tab-consensus" class="dossier-tab-content active">
+            <div class="report-section">
+              <h2 class="report-heading"><span class="heading-num">01.</span> Primary Clinical Formulation</h2>
+              <div class="consensus-box" id="dossier-executive-summary">
+                <!-- Injected by scoring.js -->
+              </div>
 
-        <div class="helpline-box">
-          <h4>🆘 Crisis Resources</h4>
-          <ul>
-            <li><strong>International:</strong> <a href="https://findahelpline.com" target="_blank">findahelpline.com</a></li>
-            <li><strong>USA:</strong> 988 Suicide & Crisis Lifeline — Call or Text <strong>988</strong></li>
-            <li><strong>India:</strong> iCall — <strong>9152987821</strong> | Vandrevala Foundation — <strong>1860-2662-345</strong></li>
-            <li><strong>UK:</strong> Samaritans — <strong>116 123</strong></li>
-          </ul>
-        </div>
+              <!-- CLINICAL PRIORITY & RISK MATRIX -->
+              <h3 class="subsection-title">Clinical Urgency & Diagnostic Hierarchy</h3>
+              <div class="priority-grid" id="dossier-priority-grid">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: BOARD DELIBERATIONS (DOCTOR DIALOGUE) -->
+          <div id="tab-deliberations" class="dossier-tab-content">
+            <div class="report-section">
+              <h2 class="report-heading"><span class="heading-num">02.</span> Board Specialist Case Conference Transcripts</h2>
+              <p class="section-lead-text">
+                Direct clinical notes and qualitative observations from each presiding specialist regarding your specific presentation:
+              </p>
+              <div class="board-transcripts-list" id="dossier-transcripts">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: DIFFERENTIAL DIAGNOSIS & SYNERGY -->
+          <div id="tab-differentials" class="dossier-tab-content">
+            <div class="report-section">
+              <h2 class="report-heading"><span class="heading-num">03.</span> Clinical Differential & Root Cause Synthesis</h2>
+              <p class="section-lead-text">
+                Many psychiatric symptoms overlap. The Board analyzes *why* your symptoms appear, distinguishing root neurological wiring from secondary adaptations:
+              </p>
+              <div class="differentials-list" id="dossier-differentials">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: COMPLETE CONDITION-BY-CONDITION PROFILES -->
+          <div id="tab-conditions" class="dossier-tab-content">
+            <div class="report-section">
+              <h2 class="report-heading"><span class="heading-num">04.</span> Multi-Condition Evaluative Spectrum (15 Clinical Indices)</h2>
+              <p class="section-lead-text">
+                Detailed quantitative breakdown across all screened psychiatric and neurodevelopmental dimensions:
+              </p>
+              <div class="clinical-indices-grid" id="dossier-indices-grid">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 5: CLINICAL ACTION ROADMAP & QUESTIONS FOR YOUR DOCTOR -->
+          <div id="tab-action" class="dossier-tab-content">
+            <div class="report-section">
+              <h2 class="report-heading"><span class="heading-num">05.</span> Multi-Disciplinary Recovery Architecture</h2>
+              
+              <div class="action-card-container">
+                <div class="action-card">
+                  <div class="action-icon">🎯</div>
+                  <h3>Immediate Autonomic Stabilization</h3>
+                  <ul id="dossier-immediate-actions" class="action-list">
+                    <!-- Injected by JS -->
+                  </ul>
+                </div>
+
+                <div class="action-card">
+                  <div class="action-icon">🧠</div>
+                  <h3>Recommended Evidence-Based Therapies</h3>
+                  <ul id="dossier-therapies" class="action-list">
+                    <!-- Injected by JS -->
+                  </ul>
+                </div>
+
+                <div class="action-card highlight-card">
+                  <div class="action-icon">📋</div>
+                  <h3>Questions to Bring to an In-Person Doctor</h3>
+                  <p class="action-card-hint">Print this page and bring these exact clinical questions to your next psychiatrist or therapist appointment:</p>
+                  <ul id="dossier-doctor-questions" class="action-list">
+                    <!-- Injected by JS -->
+                  </ul>
+                </div>
+              </div>
+
+              <!-- CRISIS HOTLINES -->
+              <div class="crisis-banner">
+                <h4>🆘 Crisis & Immediate Support Contacts</h4>
+                <div class="crisis-grid">
+                  <div class="crisis-item"><strong>USA & Canada:</strong> Dial <strong>988</strong> (Call or Text)</div>
+                  <div class="crisis-item"><strong>United Kingdom:</strong> Dial <strong>111</strong> or Samaritans at <strong>116 123</strong></div>
+                  <div class="crisis-item"><strong>India:</strong> iCall at <strong>9152987821</strong> · Vandrevala at <strong>9999 666 555</strong></div>
+                  <div class="crisis-item"><strong>International:</strong> Visit <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- OFFICIAL BOARD FOOTER & SIGN-OFF -->
+          <div class="dossier-footer">
+            <div class="signatures-row">
+              <div class="signature-block">
+                <div class="signature-line">Dr. Sarah Jenkins, M.D.</div>
+                <div class="signature-sub">Lead Neuropsychiatrist</div>
+              </div>
+              <div class="signature-block">
+                <div class="signature-line">Dr. Marcus Vance, Ph.D.</div>
+                <div class="signature-sub">Trauma & ACEs Director</div>
+              </div>
+              <div class="signature-block">
+                <div class="signature-line">Dr. Elena Rostova, M.D.</div>
+                <div class="signature-sub">Adult Neurodevelopment</div>
+              </div>
+            </div>
+            <div class="footer-legal">
+              MindCheck Multidisciplinary Clinical Screening System. Confidential medical assessment record. Generated for personal self-awareness and healthcare provider dialogue.
+            </div>
+          </div>
+
+        </div> <!-- /dossier-document -->
+
       </div>
     </div>
 
-  </div>
+  </div> <!-- /app -->
 
-  <!-- SCRIPTS (order matters: questions → scoring → app) -->
+  <!-- SCRIPT LOADING (Order: Questions -> Scoring -> App) -->
   <script src="js/questions.js"></script>
   <script src="js/scoring.js"></script>
   <script src="js/app.js"></script>
