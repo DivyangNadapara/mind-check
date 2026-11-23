@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCheck — Mental Health Screening</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="header-left" onclick="onBackToProfiles()" style="cursor: pointer;">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">MindCheck</span>
+      </div>
+      <div class="header-right">
+        <span class="header-badge">Free Screening Tool</span>
+      </div>
+    </header>
+
+    <!-- SCREEN 1: PROFILE LIST -->
+    <div id="screen-profiles" class="screen active">
+      <div class="screen-inner">
+        <div class="hero-section">
+          <h1>Welcome to MindCheck</h1>
+          <p class="hero-subtitle">A comprehensive mental health screening with 85 research-based questions covering depression, anxiety, ADHD, bipolar, OCD, PTSD, and more.</p>
+          <div class="hero-disclaimer">
+            ⚠️ This is a screening tool only — not a medical diagnosis. Always consult a licensed professional.
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2>Your Profiles</h2>
+          <button class="btn btn-primary" onclick="renderCreateProfile()">+ New Profile</button>
+        </div>
+
+        <div id="profile-list" class="profile-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: CREATE PROFILE -->
+    <div id="screen-create-profile" class="screen">
+      <div class="screen-inner">
+        <button class="btn-back" onclick="renderProfileScreen()">← Back</button>
+        <div class="form-card">
+          <h2>Create Your Profile</h2>
+          <p class="form-hint">Your data is stored locally on this device only. Nothing is sent to any server.</p>
+
+          <div class="form-group">
+            <label for="input-name">Name or Nickname *</label>
+            <input type="text" id="input-name" placeholder="e.g., Alex" maxlength="40" autocomplete="off">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-age">Age (optional)</label>
+              <input type="number" id="input-age" placeholder="e.g., 25" min="10" max="120">
+            </div>
+            <div class="form-group">
+              <label for="select-gender">Gender (optional)</label>
+              <select id="select-gender">
+                <option value="prefer-not-to-say">Prefer not to say</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non-binary">Non-binary</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-lg" onclick="onCreateProfile()">Start Assessment →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: QUIZ -->
+    <div id="screen-quiz" class="screen">
+      <div class="screen-inner quiz-layout">
+        <!-- Progress -->
+        <div class="progress-section">
+          <div class="progress-info">
+            <span id="progress-text">Question 1 of 85</span>
+            <span id="progress-percent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- Question -->
+        <div class="question-card">
+          <h2 id="question-text" class="question-text">Loading question...</h2>
+
+          <div id="options-container" class="options-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="quiz-nav">
+          <button id="btn-prev" class="btn btn-ghost" onclick="onPrevQuestion()">← Previous</button>
+          <button id="btn-next" class="btn btn-primary" onclick="onNextQuestion()" disabled>Select an answer</button>
+        </div>
+
+        <div class="quiz-hint">
+          💡 Tip: Press <kbd>1</kbd>-<kbd>4</kbd> to select, <kbd>←</kbd> <kbd>→</kbd> to navigate
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: RESULTS -->
+    <div id="screen-results" class="screen">
+      <div class="screen-inner">
+        <div class="results-header">
+          <h1>Your Screening Results</h1>
+          <p id="results-answered" class="results-meta"></p>
+        </div>
+
+        <div class="results-disclaimer">
+          ⚠️ <strong>Important:</strong> These results are for educational and self-awareness purposes only. They are <strong>NOT</strong> a clinical diagnosis. Only a licensed mental health professional can provide an accurate assessment. If you are in crisis, please contact a helpline or emergency services immediately.
+        </div>
+
+        <div class="results-summary-box">
+          <h3>📋 Summary</h3>
+          <p id="results-summary"></p>
+        </div>
+
+        <h3 class="section-title">Detailed Breakdown</h3>
+        <div id="results-cards" class="results-cards">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="results-actions">
+          <button class="btn btn-primary" onclick="onRetakeAssessment()">🔄 Retake Assessment</button>
+          <button class="btn btn-ghost" onclick="onBackToProfiles()">← Back to Profiles</button>
+        </div>
+
+        <div class="helpline-box">
+          <h4>🆘 Crisis Resources</h4>
+          <ul>
+            <li><strong>International:</strong> <a href="https://findahelpline.com" target="_blank">findahelpline.com</a></li>
+            <li><strong>USA:</strong> 988 Suicide & Crisis Lifeline — Call or Text <strong>988</strong></li>
+            <li><strong>India:</strong> iCall — <strong>9152987821</strong> | Vandrevala Foundation — <strong>1860-2662-345</strong></li>
+            <li><strong>UK:</strong> Samaritans — <strong>116 123</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCRIPTS (order matters: questions → scoring → app) -->
+  <script src="js/questions.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
